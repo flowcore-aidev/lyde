@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lydell Tech Platform</title>
+  <style>
+    body {
+      background: #0c0c0c;
+      color: #00ffcc;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: #111;
+      padding: 2rem 1rem;
+      border-bottom: 2px solid #00ffcc;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.2rem;
+    }
+    .tagline {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    section {
+      padding: 3rem 1rem;
+    }
+    .btn {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #00ffcc;
+      color: #000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: #00ccaa;
+    }
+    footer {
+      margin-top: 4rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🚀 Lydell Tech</h1>
+    <p class="tagline">Enterprise Intelligence. Fully Autonomous. Ready to Serve.</p>
+  </header>
+
+  <section>
+    <h2>Live Platform Status</h2>
+    <p id="status">Checking system status...</p>
+    <button class="btn" onclick="checkStatus()">Refresh Status</button>
+    <button class="btn" onclick="location.href='/admin'">Open Admin Panel</button>
+  </section>
+
+  <footer>
+    &copy; 2025 Lydell Tech, LLC — All Rights Reserved
+  </footer>
+
+  <script>
+    async function checkStatus() {
+      try {
+        const res = await fetch('/status');
+        const data = await res.json();
+        document.getElementById('status').textContent =
+          `✅ Status: ${data.status} | Clients: ${data.clients_onboarding ? 'Onboarding' : 'Closed'} | Pipeline: ${data.revenue_pipeline}`;
+      } catch (err) {
+        document.getElementById('status').textContent = '❌ Error reaching backend.';
+      }
+    }
+    checkStatus();
+  </script>
+</body>
+</html>
